@@ -1,0 +1,38 @@
+<div class="modal-close">
+
+  <div>{{translate 'CONTACT-US'}}</div>
+
+  <a
+    data-role="modal-close"
+    href=""
+    >
+    X
+  </a>
+
+</div>
+
+<div class="modal-container">
+
+  <form class="contact-form"
+        data-form="shipping-address-form"
+  >
+
+    {{#if this.firePageData.orderId}}
+
+      <p>{{translate 'ORDER-ID'}}: <strong>{{this.firePageData.orderId}}</strong></p>
+
+    {{/if}}
+
+    <input type="text" name="name" placeholder="{{translate 'NAME'}}" required />
+
+    <input type="email" name="email" placeholder="{{translate 'EMAIL'}}" required />
+
+    <input type="text" name="subject" placeholder="{{translate 'SUBJECT'}}" required />
+
+    <textarea name="message" placeholder="{{translate 'MESSAGE'}}" required></textarea>
+
+    <input class="button" type="submit" value="{{translate 'SUBMIT'}}" />
+
+  </form>
+
+</div>

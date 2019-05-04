@@ -1,0 +1,66 @@
+<div class="modal-close">
+
+  <div>{{translate 'SHIPPING-AND-BILLING-ADDRESS'}}</div>
+
+  <a
+    data-role="modal-close"
+    href=""
+    >
+    X
+  </a>
+
+</div>
+
+<div class="modal-container">
+
+  <form class="address-form"
+        data-form="shipping-address-form"
+  >
+
+    <p>{{{translate 'ENTER-YOUR-SHIPPING-ADDRESS'}}}</p>
+
+    <input type="text" name="address" placeholder="{{translate 'ADDRESS-LINE-1'}}" required />
+
+    <input type="text" name="address2" placeholder="{{translate 'ADDRESS-LINE-1'}}" />
+
+    <div class="shipping-address-form-inputs">
+
+      <input type="text" name="city" placeholder="{{translate 'CITY'}}" required />
+
+      <input type="text" name="zip" placeholder="{{translate 'ZIP-CODE'}}" required />
+
+    </div>
+
+    <input type="text" name="state" placeholder="{{translate 'STATE'}}" required />
+
+    <p class="billingSameAsShippingContainer">
+
+      <input type="checkbox" id="billingSameAsShipping" checked /> <label for="billingSameAsShipping">{{translate 'BILLING-SAME-AS-SHIPPING'}}</label>
+
+    </p>
+
+    <div class="billing-form-container">
+
+      <p>{{{translate 'ENTER-YOUR-BILLING-ADDRESS'}}}</p>
+
+      <input type="text" name="addressBilling" placeholder="{{translate 'ADDRESS-LINE-1'}}" />
+
+      <input type="text" name="address2Billing" placeholder="{{translate 'ADDRESS-LINE-2'}}" />
+
+      <div class="shipping-address-form-inputs">
+
+        <input type="text" name="cityBilling" placeholder="{{translate 'CITY'}}" />
+
+        <input type="text" name="zipBilling" placeholder="{{translate 'ZIP-CODE'}}" />
+
+      </div>
+
+      <input type="text" name="stateBilling" placeholder="{{translate 'STATE'}}" />
+
+    </div>
+
+    <input class="button" type="submit" value="{{translate 'SUBMIT'}}" />
+
+  </form>
+
+</div>

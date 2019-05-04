@@ -1,0 +1,214 @@
+{{>templates/open page='login'}}
+
+{{>templates/header}}
+
+<main class="login-page">
+
+  <div class="container">
+
+    <h1>Admin</h1>
+
+    <section class="collections"
+      data-role="toggle-admin-view"
+      >
+
+      <h2>Site Collections/Tables</h2>
+
+      <form
+        data-form-add="collection"
+        >
+
+        <input
+          name="collectionName"
+          placeholder="collectionName"
+          type="text"
+          />
+
+        <input
+          type="submit"
+          />
+
+      </form>
+
+    </section>
+
+    <section class="strings"
+      data-role="toggle-admin-view"
+      >
+
+      <h2>Strings</h2>
+
+      <form
+        data-string="create"
+        >
+
+        <div
+          class="form-heading"
+          >
+
+          {{translate 'CREATE-TRANSLATED-STRING'}}
+
+        </div>
+
+        <input
+          name="slug"
+          placeholder="slug"
+          type="input"
+          />
+
+        <input
+          name="text"
+          placeholder="text"
+          type="input"
+          />
+
+        |
+
+        <input
+          type="submit"
+          value="submit"
+          />
+
+      </form>
+
+      {{#each strings}}
+
+        <div
+          class="string"
+          >
+
+          <strong
+            data-edit-string="{{@key}}"
+            >
+
+            {{@key}}:
+
+          </strong>
+
+        </div>
+
+      {{/each}}
+
+    </section>
+
+    <section class="stripe-products">
+
+      <h2>Create Parent Stripe Product</h2>
+
+      <form data-add-product-to-stripe>
+
+        <div><input type="text" name="item_name" placeholder="Name" value="" /></div>
+
+        <div><input type="submit" /></div>
+
+      </form>
+
+    </section>
+
+    <section class="import-products">
+
+      <h2>Update Products</h2>
+
+      <input type="file" id="file" name="file" />
+
+      <button id="upload">upload</button>
+
+      <hr />
+
+      <div>
+
+        <h2>Update Product</h2>
+
+        <form data-update-main-product="{{product.item_id}}">
+
+          <input name="name" value={{product.name}} />
+
+          <textarea name="description">{{product.description}}</textarea>
+
+          <input name="brand" value="{{product.brand}} "/>
+
+          <input name="size" value="{{product.size}} "/>
+
+          <input name="price" value="{{product.price}} "/>
+
+          <input name="msrp" value="{{product.msrp}} "/>
+
+          <input type="submit" />
+
+        </form>
+
+      </div>
+
+      <hr />
+
+      <div>
+
+        {{#each products as |variant index|}}
+
+          <form data-update-product="{{variant.item_id}}">
+
+            <div class="product-form">
+
+              <div><input class="product-name-input" value="{{variant.item_name}}" name="item_name" type="text" /></div>
+
+              <div><input value="{{variant.item_color}}" placeholder="COLOR" name="item_color" type="text" /></div>
+
+              <div><input type="submit" /></div>
+
+              <div><a  href="" data-add-product-to-stripe-parent={{variant.item_id}}>Send Product to Stripe SKU</a></div>
+
+              <div><a  href="" data-add-variant-to-product={{variant.item_id}}>Add to Variants</a></div>
+
+            </div>
+
+          </form>
+
+        {{/each}}
+
+      </div>
+
+      <hr />
+
+      <div>
+
+        {{#each product.variants as |variant index|}}
+
+          <form data-update-variant="{{variant.item_id}}">
+
+            <div class="product-form">
+
+              <div><input class="product-name-input" value="{{variant.name}}" name="name" type="text" /></div>
+
+              <div><input value="{{variant.item_color}}" placeholder="COLOR" name="item_color" type="text" /></div>
+
+              <div><input value="{{variant.image_file}}" placeholder="Image File" name="image_file" type="text" /></div>
+
+              <div><input value="{{variant.qty_avail}}" placeholder="qty_avail" name="qty_avail" type="text" /></div>
+
+              <input value="{{variant.stripkeSKU}}" placeholder="stripkeSKU" name="stripkeSKU" type="text" />
+
+              <input value="{{variant.item_id}}" placeholder="item_id" name="item_id" type="hidden" />
+
+              <div><input type="submit" /></div>
+
+              <div><a  href="" data-add-product-to-stripe-parent={{variant.item_id}}>Send Product to Stripe SKU</a></div>
+
+              <div><a  href="" data-add-variant-to-product={{variant.item_id}}>Add to Variants</a></div>
+
+            </div>
+
+          </form>
+
+        {{/each}}
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

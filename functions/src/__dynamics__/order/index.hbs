@@ -1,0 +1,126 @@
+{{>templates/open page='product'}}
+
+{{>templates/header}}
+
+<main class="product-page">
+
+  <div class="container">
+
+    <div class="products-active-product">
+
+      <div class="products-active-product-image">
+
+        <img class="products-active-product-image-img"
+          src="{{this.firePageData.variant.image_file}}"
+          />
+
+      </div>
+
+      <div class="products-active-product-info"
+            data-active-product="{{this.firePageData.variant.item_id}}"
+            >
+
+        <div class="products-active-product-info-container">
+
+          <div class="products-active-product-info-item mod-name">
+
+            <h1>{{this.firePageData.variant.name}}</h1>
+
+          </div>
+
+          <div class="products-active-product-info-item mod-description">
+
+            <p>{{translate 'PRODUCT-DESCRIPTION'}}</p>
+
+            <p>{{product.size}}</p>
+
+            <p>{{translate 'BRAND'}}: {{product.brand}}</p>
+
+          </div>
+
+          <div class="product-pay">
+
+            <div>
+              {{translate 'QUANTITY'}}: {{this.firePageData.qty}}
+            </div>
+
+          </div>
+
+          <div class="product-pay">
+
+            <div>
+              <strong>{{translate 'PRICE'}} - </strong>
+              ${{this.firePageData.orderTotal}}
+            </div>
+
+          </div>
+
+          <hr />
+
+          <div>
+
+            <h3>{{translate 'SHIPPING-ADDRESS'}}</h3>
+
+            <div>{{this.firePageData.address}}</div>
+
+            {{#if this.firePageData.address2}}
+
+              <div>{{this.firePageData.address2}}</div>
+
+            {{/if}}
+
+            <div>{{this.firePageData.city}}, {{this.firePageData.state}}, {{this.firePageData.zip}}</div>
+
+          </div>
+
+          {{#if this.firePageData.addressBilling}}
+
+            <div>
+
+              <h3>{{translate 'BILLING-ADDRESS'}}</h3>
+
+              <div>{{this.firePageData.addressBilling}}</div>
+
+              {{#if this.firePageData.address2Billing}}
+
+                <div>{{this.firePageData.address2Billing}}</div>
+
+              {{/if}}
+
+              <div>{{this.firePageData.cityBilling}}, {{this.firePageData.stateBilling}}, {{this.firePageData.zipBilling}}</div>
+
+            </div>
+
+          {{/if}}
+
+          <div>
+
+            <h3>{{translate 'PURCHASED-ON'}}</h3>
+
+            <div>{{this.firePageData.createdAt}}</div>
+
+          </div>
+
+          <hr />
+
+          <div>
+
+            <h3>{{translate 'STATUS'}}</h3>
+
+            <div>Processing</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

@@ -1,0 +1,45 @@
+{{>templates/open page='product'}}
+
+{{>templates/header}}
+
+<main class="product-page">
+
+  <div class="container">
+
+    <div>Set: {{this.firePageData.name}}</div>
+
+    <div>Code: {{this.firePageData.code}}</div>
+
+    <div>Release Date: {{this.firePageData.releaseDate}}</div>
+
+    <div>Type: {{this.firePageData.type}}</div>
+
+    {{#if this.firePageData.block}}
+
+      <div>Block: {{this.firePageData.block}}</div>
+
+    {{/if}}
+
+    <div>
+
+      {{#if this.firePageData.mtgLink}}
+
+        MTG Link: <a href="{{this.firePageData.mtgLink}}" target="_blank">{{this.firePageData.mtgLink}}</a>
+
+      {{/if}}
+
+    </div>
+
+    <div class="cards">
+
+      {{> partials/cards cards=firePageData.cards}}
+
+    </div>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

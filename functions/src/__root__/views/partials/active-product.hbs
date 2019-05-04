@@ -1,0 +1,82 @@
+<div class="products-active-product-image">
+
+  <img class="products-active-product-image-img"
+    src="{{activeVariant.image_file}}"
+    />
+
+</div>
+
+<div class="products-active-product-info"
+      data-active-product="{{activeVariant.item_id}}"
+      >
+
+  <div class="products-active-product-info-container">
+
+    <div class="products-active-product-info-item mod-name">
+
+      <h1>{{translate activeVariant.name}}</h1>
+
+    </div>
+
+    <div class="products-active-product-info-item mod-description">
+
+      <p>{{translate 'PRODUCT-DESCRIPTION'}}</p>
+
+      <p>{{translate 'SIZE'}}: {{product.size}}</p>
+
+      <p>{{translate 'BRAND'}}: {{product.brand}}</p>
+
+    </div>
+
+    <div class="product-pay">
+
+      <div>
+        {{translate 'QUANTITY'}}:
+        <input class="qty"
+               type="number"
+               id="qty"
+               min="1"
+               name="qty"
+               value="1"
+               />
+      </div>
+
+    </div>
+
+    <div class="product-pay">
+
+      <div class="product-msrp">
+        <strong>{{translate 'ORIGINAL-PRICE'}} - </strong>
+        <span class="strike" data-target="orgPrice">${{product.msrp}}</span>
+      </div>
+
+      <div class="product-sale-price">
+        <strong>{{translate 'SALE-PRICE'}} - </strong>
+        <span data-target="price">${{product.price}}</span>
+      </div>
+
+      {{!<div class="product-price">
+        Quantity x
+        <input @input="updateQuantity" v-model="quantity" min="1" class="" type="number" value="1" />
+      </div>}}
+
+      <div class="text-right">
+
+        <a href=""
+          data-init-checkout-flow="{{product.stripeSKU}}"
+          class="button"
+          id="checkout-button-{{product.stripeSKU}}"
+          role="link"
+        >
+          {{translate 'CHECKOUT'}}
+        </a>
+
+        <div id="error-message"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

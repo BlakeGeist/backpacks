@@ -1,0 +1,42 @@
+{{>templates/open page='home'}}
+
+{{!>templates/header}}
+
+<main class="index-page">
+
+  <div class="container">
+
+    <div class="products-active-product">
+
+      {{> partials/active-product product=product}}
+
+    </div>
+
+    <div class="products">
+
+      {{#each product.variants as |variant index|}}
+
+        <a
+          class="products-product"
+          data-activate-variant="{{variant.item_id}}"
+          href=""
+        >
+
+          <img
+            class="products-product-img"
+            src="{{variant.image_file}}"
+            />
+
+        </a>
+
+      {{/each}}
+
+    </div>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}
