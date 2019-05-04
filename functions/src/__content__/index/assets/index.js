@@ -43,14 +43,26 @@
       C.run('modal:open', 'shipping-same-as-billing');
     });
 
-    //when the #qty input is incremented update the prices
-    $(document).on('keyup mouseup', '#qty', function(e){
-      //get the value of the input as a number
-      var val = parseInt($('#qty').val());
-      var product = getActiveProduct();
+    //on click increment the price
+    $(document).on('click', '[data-increment-price]', function(e){
+      H.stopEvents(e);
+      //get the incrment direction 1/-1
+      var increment = parseInt($(this).data('increment-price'));
+      //get the current qty
+      var qty = parseInt($('[data-target="qty"]').html());
+      //if the current qty is 1 and the incrment is -1, they are trying to set the qty to < 1, and prevent that
+      if(qty == 1 && increment == -1){
+        return;
+      }
+      //figure out wha the newly incremnet qty is
+      var newlyIncrementedQTY = qty + increment;
+      //set the newlyIncrementedQTY as the value of the [data-target="qty"] element
+      $('[data-target="qty"]').html(newlyIncrementedQTY);
+      //get the product as an object
+      var product = site.context.product;
       //update the html for the new updated number after being rounded to the nearest hundreth
-      $('[data-target="orgPrice"]').html('$' + roundToNearestHundreth(product.msrp*val));
-      $('[data-target="price"]').html('$' + roundToNearestHundreth(product.price*val));
+      $('[data-target="orgPrice"]').html('$' + roundToNearestHundreth(product.msrp*newlyIncrementedQTY));
+      $('[data-target="price"]').html('$' + roundToNearestHundreth(product.price*newlyIncrementedQTY));
     });
   }
 
@@ -61,8 +73,8 @@
       var formData = H.getFormData(this);
       var product = site.context.product;
       var activeVariant = getActiveProduct();
-      formData.orderTotal = product.price*parseInt($('#qty').val());
-      formData.orderOrgPrice = product.msrp*parseInt($('#qty').val());
+      formData.orderTotal = product.price*parseInt($('[data-target="qty"]').html());
+      formData.orderOrgPrice = product.msrp*parseInt($('[data-target="qty"]').html());
       formData.variant = activeVariant;
       formData.skuId = activeVariant.stripkeSKU;
       formData.shippingSameAsBilling= false;
@@ -83,7 +95,7 @@
     //set the current time as the createdAt time
     payload.createdAt = new Date($.now());
     //get the quantity of items being sold
-    payload.qty = $('#qty').val();
+    payload.qty = $('[data-target="qty"]').html();
     //create the order in firestore
     db.collection('orders').add(payload)
       .then(function(doc){
@@ -112,7 +124,8 @@
     //init stripe
     var stripe = Stripe('pk_test_9zTgVGnh5lp27tRAdf0DDSkO');
     //get the quantity of items to be ordred
-    var qty = $('#qty').val();
+    var qty = $('[data-target="qty"]').html();
+    console.log(qty)
     //set the base url for the resposne from stripe
     //expect default is remote
     //if its actually local point response url to local api

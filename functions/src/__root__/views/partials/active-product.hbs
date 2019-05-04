@@ -28,18 +28,19 @@
 
     </div>
 
-    <div class="product-pay">
+    <div class="product-qty">
 
-      <div>
-        {{translate 'QUANTITY'}}:
-        <input class="qty"
-               type="number"
-               id="qty"
-               min="1"
-               name="qty"
-               value="1"
-               />
-      </div>
+      {{translate 'QUANTITY'}}:
+
+       <div class="inrement-qty">
+
+         <div class="inrement-qty-item mod-incrment-down" href="" data-increment-price="-1"> - </div>
+
+         <div class="inrement-qty-item mod-current-qty" data-target="qty" href=""> 1 </div>
+
+         <div class="inrement-qty-item mod-incrment-up" href="" data-increment-price="1"> + </div>
+
+       </div>
 
     </div>
 
