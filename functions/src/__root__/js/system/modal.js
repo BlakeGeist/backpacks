@@ -51,16 +51,12 @@
       data: data
       //currentUser: site.me.getDetails()
     });
-
     var compiled = "<div class='modal' id='modal-" + tplName + "'>" + tpl(tplArgs) + '</div>';
     var $modal = $(compiled);
-    console.log($modal)
     $modal.appendTo('#modalBackdrop');
     $('#modalBackdrop').addClass(tplName + '-modal');
-
     if (typeof ready === 'function') ready($modal);
     C.run('modal:open:element', $modal, tplArgs);
-
     E.once('modal:did-close:' + tplName, function oneTimeRemover () {
       $modal.remove();
     });

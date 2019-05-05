@@ -125,7 +125,6 @@
     var stripe = Stripe('pk_test_9zTgVGnh5lp27tRAdf0DDSkO');
     //get the quantity of items to be ordred
     var qty = $('[data-target="qty"]').html();
-    console.log(qty)
     //set the base url for the resposne from stripe
     //expect default is remote
     //if its actually local point response url to local api
