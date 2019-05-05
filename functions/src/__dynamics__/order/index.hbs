@@ -24,7 +24,7 @@
 
           <div class="products-active-product-info-item mod-name">
 
-            <h1>{{this.firePageData.variant.name}}</h1>
+            <h1>{{translate this.firePageData.variant.name}}</h1>
 
           </div>
 
@@ -61,6 +61,8 @@
 
             <h3>{{translate 'SHIPPING-ADDRESS'}}</h3>
 
+            <div><strong>{{this.firePageData.shipTo}}</strong></div>
+
             <div>{{this.firePageData.address}}</div>
 
             {{#if this.firePageData.address2}}
@@ -78,6 +80,8 @@
             <div>
 
               <h3>{{translate 'BILLING-ADDRESS'}}</h3>
+
+              <div><strong>{{this.firePageData.shipTo}}</strong></div>
 
               <div>{{this.firePageData.addressBilling}}</div>
 
