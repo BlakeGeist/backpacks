@@ -24,7 +24,7 @@
   //function
   helpers.getFormData = function(form){
     var params = $(form).serializeArray();
-    var thisObj = _.reduce(params , function(obj,param) {
+    var thisObj = _.reduce(params, function(obj,param) {
      obj[param.name] = param.value
      return obj;
     }, {});
@@ -55,6 +55,20 @@
         .toLowerCase()
         .replace(/[^\w ]+/g,'')
         .replace(/ +/g,'-');
+  }
+
+  //this function will add the loading class to a submit button or take it off
+  //example call ominto.helpers.spinSubmitInput('on')
+  helpers.spinSubmitInput = function(status) {
+    var submitWrapper = $('.button-wrapper').last();
+    var submitButton = submitWrapper.children('[type="submit"]');
+    if (status === 'on') {
+      submitWrapper.addClass('loading');
+      submitButton.attr('disabled', true);
+    } else {
+      submitWrapper.removeClass('loading');
+      submitButton.removeAttr('disabled');
+    }
   }
 
   helpers.param = function (name) {

@@ -1,8 +1,8 @@
-{{>templates/open page='product'}}
+{{>templates/open page='order'}}
 
 {{>templates/header}}
 
-<main class="product-page">
+<main class="order-page">
 
   <div class="container">
 
@@ -57,49 +57,25 @@
 
           <hr />
 
-          <div>
+          <div class="addresses">
 
-            <h3>{{translate 'SHIPPING-ADDRESS'}}</h3>
+            {{> partials/address
+                address=this.firePageData.shippingAddress
+                title="SHIPPING-ADDRESS"
+            }}
 
-            <div><strong>{{this.firePageData.shipTo}}</strong></div>
-
-            <div>{{this.firePageData.address}}</div>
-
-            {{#if this.firePageData.address2}}
-
-              <div>{{this.firePageData.address2}}</div>
-
-            {{/if}}
-
-            <div>{{this.firePageData.city}}, {{this.firePageData.state}}, {{this.firePageData.zip}}</div>
+            {{> partials/address
+                address=this.firePageData.billingAddress
+                title='BILLING-ADDRESS'
+            }}
 
           </div>
 
-          {{#if this.firePageData.addressBilling}}
-
-            <div>
-
-              <h3>{{translate 'BILLING-ADDRESS'}}</h3>
-
-              <div><strong>{{this.firePageData.shipTo}}</strong></div>
-
-              <div>{{this.firePageData.addressBilling}}</div>
-
-              {{#if this.firePageData.address2Billing}}
-
-                <div>{{this.firePageData.address2Billing}}</div>
-
-              {{/if}}
-
-              <div>{{this.firePageData.cityBilling}}, {{this.firePageData.stateBilling}}, {{this.firePageData.zipBilling}}</div>
-
-            </div>
-
-          {{/if}}
+          <hr />
 
           <div>
 
-            <h3>{{translate 'PURCHASED-ON'}}</h3>
+            <p><strong>{{translate 'PURCHASED-ON'}}</strong></p>
 
             <div>{{this.firePageData.createdAt}}</div>
 
@@ -109,7 +85,7 @@
 
           <div>
 
-            <h3>{{translate 'STATUS'}}</h3>
+            <p><strong>{{translate 'STATUS'}}</strong></p>
 
             <div>Processing</div>
 

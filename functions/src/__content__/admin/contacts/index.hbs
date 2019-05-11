@@ -1,0 +1,53 @@
+{{>templates/open page='admin-contacts'}}
+
+{{>templates/header}}
+
+<main class="admin-contact-page">
+
+  <div class="container">
+
+    <h1>Contacts</h1>
+
+    <table>
+
+      <tr>
+
+        <th>Time Stamp</th>
+
+        <th>Email</th>
+
+        <th>Name</th>
+
+        <th>Subject</th>
+
+        <th>Message</th>
+
+      </tr>
+
+      {{#each firePageData.contacts as |contact index|}}
+
+        <tr>
+
+          <td>{{stringDate contact.createdAt}}</td>
+
+          <td>{{contact.email}}</td>
+
+          <td>{{contact.name}}</td>
+
+          <td>{{contact.subject}}</td>
+
+          <td>{{contact.message}}</td>
+
+        </tr>
+
+      {{/each}}
+
+    </table>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

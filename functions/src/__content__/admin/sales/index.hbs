@@ -1,0 +1,49 @@
+{{>templates/open page='login'}}
+
+{{>templates/header}}
+
+<main class="admin-order-page">
+
+  <div class="container">
+
+    <h1>Orders</h1>
+
+    <table>
+
+      <tr>
+
+        <th>Order Id</th>
+
+        <th>Time Stamp</th>
+
+        <th>Email</th>
+
+      </tr>
+
+      {{#each firePageData.orders as |order index|}}
+
+        <tr>
+
+          <th>
+
+            <a href="/{{../settings.region}}/{{../settings.language}}/order/{{order._id}}/">{{order._id}}</a>
+
+          </th>
+
+          <th>{{stringDate order.createdAt}}</th>
+
+          <th>{{order.email}}</th>
+
+        </tr>
+
+      {{/each}}
+
+    </table>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

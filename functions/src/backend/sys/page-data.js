@@ -132,6 +132,39 @@ function * getFirePageData (ctx) {
     ctx.state.firePageData = data;
   }
 
+  if(ctx.state.relativeUrl.includes('sales')){
+    const fireData = {};
+    yield db.collection('orders').get()
+      .then(query=>{
+          let data = query.docs.map(doc=>{
+              let x = doc.data()
+                  x['_id']=doc.id;
+                  return x;
+          })
+          _.extend(fireData, data);
+      })
+      var formatted = _.indexBy(fireData, '_id');
+      ctx.state.firePageData = {
+        orders: formatted
+      }
+  }
+
+  if(ctx.state.relativeUrl.includes('contacts')){
+    const fireData = {};
+    yield db.collection('contacts').get()
+      .then(query=>{
+          let data = query.docs.map(doc=>{
+              let x = doc.data()
+                  x['_id']=doc.id;
+                  return x;
+          })
+          _.extend(fireData, data);
+      })
+      var formatted = _.indexBy(fireData, '_id');
+      ctx.state.firePageData = {
+        contacts: formatted
+      }
+  }
 
   if(ctx.state.firePageData) {
     return ctx.state.firePageData

@@ -37,7 +37,6 @@
     $('.modal').on('submit', '[data-form="shipping-address-form"]', function(e){
       H.stopEvents(e);
       var formData = H.getFormData(this);
-      console.log(formData);
       var payload = {
         data: formData,
         collection: 'contacts'

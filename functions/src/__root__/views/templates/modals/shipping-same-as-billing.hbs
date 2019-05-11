@@ -1,6 +1,6 @@
 <div class="modal-close">
 
-  <div>{{translate 'SHIPPING-AND-BILLING-ADDRESS'}}</div>
+  <div>{{{translate 'SHIPPING-AND-BILLING-ADDRESS'}}}</div>
 
   <a
     data-role="modal-close"
@@ -16,6 +16,10 @@
   <form class="address-form"
         data-form="shipping-address-form"
   >
+
+    <p>{{translate 'EMAIL'}}:</p>
+
+    <input type="email" name="email" placeholder="Email" required />
 
     <p>{{translate 'SHIP-TO'}}:</p>
 
@@ -39,11 +43,17 @@
 
     <p class="billingSameAsShippingContainer">
 
-      <input type="checkbox" id="billingSameAsShipping" checked /> <label for="billingSameAsShipping">{{translate 'BILLING-SAME-AS-SHIPPING'}}</label>
+      <input type="checkbox" id="billingSameAsShipping" name="billingSameAsShipping" checked />
+
+      <label for="billingSameAsShipping">{{translate 'BILLING-SAME-AS-SHIPPING'}}</label>
 
     </p>
 
     <div class="billing-form-container">
+
+      <p>{{translate 'BILL-TO'}}:</p>
+
+      <input type="text" name="billTo" placeholder="Name" />
 
       <p>{{{translate 'ENTER-YOUR-BILLING-ADDRESS'}}}</p>
 
@@ -63,7 +73,11 @@
 
     </div>
 
-    <input class="button" type="submit" value="{{translate 'SUBMIT'}}" />
+      <div class="button-wrapper">
+
+        <input class="button" type="submit" value="{{translate 'SUBMIT'}}" />
+
+      </div>
 
   </form>
 

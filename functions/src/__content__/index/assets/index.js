@@ -70,15 +70,46 @@
   function initShippingCheckModalUI() {
     $('.modal').on('submit', '[data-form="shipping-address-form"]', function(e){
       H.stopEvents(e);
+      H.spinSubmitInput('on');
       var formData = H.getFormData(this);
       var product = site.context.product;
       var activeVariant = getActiveProduct();
-      formData.orderTotal = product.price*parseInt($('[data-target="qty"]').html());
-      formData.orderOrgPrice = product.msrp*parseInt($('[data-target="qty"]').html());
-      formData.variant = activeVariant;
-      formData.skuId = activeVariant.stripkeSKU;
-      formData.shippingSameAsBilling= false;
-      createOrder(formData);
+
+      var shippingAddress = {
+        name: formData.shipTo,
+        address: formData.address,
+        address2: formData.address2,
+        city: formData.city,
+        zip: formData.zip,
+        state: formData.state
+      };
+
+      var payload = {
+        shipTo: formData.shipTo,
+        email: formData.email,
+        variant: activeVariant,
+        shippingAddress: shippingAddress,
+        orderTotal: product.price*parseInt($('[data-target="qty"]').html()),
+        orderOrgPrice: product.msrp*parseInt($('[data-target="qty"]').html()),
+        qty: parseInt($('[data-target="qty"]').html())
+      }
+
+      if($('#billingSameAsShipping').is(':checked')){
+        payload.billingAddress = shippingAddress;
+      } else {
+        if(formData.billTo.length < 2) {
+          formData.billTo = formData.shipTo
+        }
+        payload.billingAddress = {
+          name: formData.billTo,
+          address: formData.addressBilling,
+          address2: formData.address2Billing,
+          city: formData.cityBilling,
+          zip: formData.zipBilling,
+          state: formData.stateBilling
+        };
+      }
+      createOrder(payload);
     });
 
     $('.modal').on('change', '#billingSameAsShipping',function(e){
@@ -94,13 +125,12 @@
   function createOrder(payload){
     //set the current time as the createdAt time
     payload.createdAt = new Date($.now());
-    //get the quantity of items being sold
-    payload.qty = $('[data-target="qty"]').html();
     //create the order in firestore
     db.collection('orders').add(payload)
       .then(function(doc){
         //send the newly created orderId to the initStripeCheckout function
-        intStripeCheckOut(doc.id);
+        console.log(doc)
+        intStripeCheckOut(doc.id, payload.email);
       })
       .catch(function(e){
         console.log('error' + e);
@@ -116,7 +146,7 @@
 
   //this function will initiate the stripe checkout flow
   //requires orderId
-  function intStripeCheckOut(orderId){
+  function intStripeCheckOut(orderId, email){
     //get the sku of the item to be ordred
     var stripeSKU = $(this).data('init-checkout-flow');
     //get the active product
@@ -141,6 +171,7 @@
       //add a q param to the call with the user id? or order ID? so I can know what happened in the thing
       successUrl: location + '&orderId='+orderId+'&success=true',
       cancelUrl: location + '&orderId='+orderId+'&success=false',
+      customerEmail: email,
     })
     .then(function (result) {
       if (result.error) {
