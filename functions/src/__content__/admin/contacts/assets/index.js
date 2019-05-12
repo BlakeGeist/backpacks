@@ -10,6 +10,8 @@
   var USER;
   var db = firebase.firestore();
 
+  H.requireAuth();
+
   preDomReady();
 
   function preDomReady(){

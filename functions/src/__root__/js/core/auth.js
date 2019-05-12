@@ -123,7 +123,7 @@
       firebase.auth().onAuthStateChanged(function(user) {
         if(user){
           setCookie('__session=uid', user.uid, 7)
-          C.run('navigate:home');
+          C.run('navigate:page', 'admin');
         }
       })
 

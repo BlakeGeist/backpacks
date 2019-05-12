@@ -1,0 +1,30 @@
+{{>templates/open page='home'}}
+
+{{!>templates/header}}
+
+<main class="index-page">
+
+  <div class="container">
+
+    <div>
+
+      <div class="is-expanded-content">
+
+        <div>{{translate 'LOGIN'}}</div>
+
+        {{>
+          partials/forms/email-pass
+          mod="sign-in"
+        }}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+{{>templates/footer}}
+
+{{>templates/close}}

@@ -37,6 +37,12 @@
     C.run('modal:close');
   }
 
+  helpers.requireAuth = function(){
+    if(!site.context.fireUser.email){
+      window.location.replace("/");
+    }
+  }
+
   helpers.params = function () {
     return window.location.search
       .replace(/^\?/, '')
